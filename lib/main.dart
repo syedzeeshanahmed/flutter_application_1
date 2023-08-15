@@ -39,7 +39,12 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       alignment: Alignment.center,
-                      child: const Text("Sign In"),
+                      padding: const EdgeInsets.only(top: 30, bottom: 20),
+                      child: const Text("Sign In",
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cutive')),
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -92,7 +97,12 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            //Header Container
+            Container(
+              padding: const EdgeInsets.only(bottom: 0, left: 10),
+              alignment: Alignment.topLeft,
+              child: const Text("Enter your Email",
+                  style: TextStyle(fontSize: 14.0)),
+            ),
             Container(
               padding: const EdgeInsets.all(8.0),
               alignment: Alignment.center,
@@ -108,13 +118,19 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             Container(
+              padding: const EdgeInsets.only(top: 15, bottom: 0, left: 10),
+              alignment: Alignment.topLeft,
+              child: const Text("Enter your password",
+                  style: TextStyle(fontSize: 14.0)),
+            ),
+            Container(
               padding: const EdgeInsets.all(8.0),
               alignment: Alignment.center,
               child: TextFormField(
                 obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: "Password",
+                  hintText: "Password",
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
