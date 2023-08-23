@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,13 +33,16 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Container(
+                      height: 300,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/images/splashBG.png"),
-                              fit: BoxFit.cover)),
+                        image: AssetImage("assets/images/splashBG.png"),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.topCenter,
+                      )),
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 90, bottom: 20),
-                      child: Image.asset('assets/images/logo.png', width: 150),
+                      child: Image.asset('assets/images/logo.png', width: 200),
                     )
                   ],
                 ),
@@ -61,10 +66,38 @@ class HomePage extends StatelessWidget {
                       fontFamily: 'Cutive')),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 0),
               color: Colors.white,
               alignment: Alignment.center,
               child: const MyCustomForm(),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+              color: Colors.white,
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                    text: "Don't have an account? ",
+                    style: TextStyle(fontSize: 12)
+                    ),
+                  TextSpan(
+                      text: "Sign Up here",
+                      style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          String url = "https://www.fluttercampus.com";
+                          var urllaunchable = await canLaunch(
+                              url); //canLaunch is from url_launcher package
+                          if (urllaunchable) {
+                            await launch(
+                                url); //launch is from url_launcher package to launch URL
+                          } else {
+                            print("URL can't be launched.");
+                          }
+                        })
+                ]),
+              ),
             ),
           ],
         ),
@@ -122,6 +155,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   hintText: 'Hello@yahoo.com',
                   fillColor: const Color.fromARGB(255, 243, 249, 255),
+                  prefixIcon: Icon(Icons.email_outlined, size: 14, color: const Color.fromARGB(255, 153, 198, 214)),
                   // fillColor: Colors.deepPurpleAccent,
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -154,8 +188,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                   ),
                   filled: true,
                   hintStyle: TextStyle(color: Colors.grey[800]),
-                  labelText: "Password",
+                  hintText: "Password",
                   fillColor: const Color.fromARGB(255, 243, 249, 255),
+                  prefixIcon: Icon(Icons.lock_clock_outlined, size: 14, color: const Color.fromARGB(255, 153, 198, 214)),
                   // fillColor: Colors.deepPurpleAccent,
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -167,13 +202,45 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
               ),
             ),
+
             Container(
-              padding: const EdgeInsets.only(top: 20, bottom: 30),
+              padding: const EdgeInsets.only(top:10, left: 30, right: 30, bottom: 0),
+              color: Colors.white,
+              alignment: Alignment.centerRight,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Forgot Password?",
+                      style: TextStyle(fontSize: 12),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          String url = "https://www.fluttercampus.com";
+                          var urllaunchable = await canLaunch(
+                              url); //canLaunch is from url_launcher package
+                          if (urllaunchable) {
+                            await launch(
+                                url); //launch is from url_launcher package to launch URL
+                          } else {
+                            print("URL can't be launched.");
+                          }
+                        })
+                ]),
+              ),
+            ),
+
+
+            Container(
+              padding: const EdgeInsets.only(
+                  top: 20, bottom: 30, left: 15, right: 15),
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, //<-- SEE HERE
-                    minimumSize: const Size.fromHeight(60)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    backgroundColor:
+                        const Color.fromARGB(255, 153, 198, 214), //<-- SEE HERE
+                    minimumSize: const Size.fromHeight(65)),
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
                   if (_formKey.currentState!.validate()) {
@@ -184,7 +251,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     );
                   }
                 },
-                child: const Text('Submit'),
+                child: const Text('Sign In'),
               ),
             ),
           ]),
