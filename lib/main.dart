@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           scaffoldBackgroundColor: const Color.fromARGB(255, 242, 248, 254)),
-      home: HomePage(),
+      home: AnimatedSplashScreen(
+          splash: Container(
+            height:double.infinity,
+            color: Colors.red,
+            width: double.infinity,
+            child: const Column(
+              children: [
+                Text('Hello!'),
+                Text('Goodbye!'),
+              ],
+            ),
+          ),
+          nextScreen: HomePage()),
     );
   }
 }
@@ -78,12 +91,12 @@ class HomePage extends StatelessWidget {
               child: RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                    text: "Don't have an account? ",
-                    style: TextStyle(fontSize: 12)
-                    ),
+                      text: "Don't have an account? ",
+                      style: TextStyle(fontSize: 12)),
                   TextSpan(
                       text: "Sign Up here",
-                      style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
                           String url = "https://www.fluttercampus.com";
@@ -155,7 +168,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   hintText: 'Hello@yahoo.com',
                   fillColor: const Color.fromARGB(255, 243, 249, 255),
-                  prefixIcon: Icon(Icons.email_outlined, size: 14, color: const Color.fromARGB(255, 153, 198, 214)),
+                  prefixIcon: Icon(Icons.email_outlined,
+                      size: 14,
+                      color: const Color.fromARGB(255, 153, 198, 214)),
                   // fillColor: Colors.deepPurpleAccent,
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -190,7 +205,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   hintText: "Password",
                   fillColor: const Color.fromARGB(255, 243, 249, 255),
-                  prefixIcon: Icon(Icons.lock_clock_outlined, size: 14, color: const Color.fromARGB(255, 153, 198, 214)),
+                  prefixIcon: Icon(Icons.lock_clock_outlined,
+                      size: 14,
+                      color: const Color.fromARGB(255, 153, 198, 214)),
                   // fillColor: Colors.deepPurpleAccent,
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -202,9 +219,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
               ),
             ),
-
             Container(
-              padding: const EdgeInsets.only(top:10, left: 30, right: 30, bottom: 0),
+              padding: const EdgeInsets.only(
+                  top: 10, left: 30, right: 30, bottom: 0),
               color: Colors.white,
               alignment: Alignment.centerRight,
               child: RichText(
@@ -227,8 +244,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ]),
               ),
             ),
-
-
             Container(
               padding: const EdgeInsets.only(
                   top: 20, bottom: 30, left: 15, right: 15),

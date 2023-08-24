@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   getwidget: ^3.1.1
   url_launcher: ^6.1.8
+  animated_splash_screen: ^1.3.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,8 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/splashBG.png
+    - assets/images/splash_bg.jpg
+    - assets/images/masjid.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
